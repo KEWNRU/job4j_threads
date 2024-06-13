@@ -26,5 +26,6 @@ bin/
 .vscode/
 
 ### Mac OS ###
-
-/.idea/
+target/*
+/target/
+.idea/
