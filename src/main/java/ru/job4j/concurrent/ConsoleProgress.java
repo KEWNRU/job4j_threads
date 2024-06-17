@@ -12,7 +12,7 @@ public class ConsoleProgress implements Runnable {
     public void run() {
         try {
             int i = 0;
-            char[] process = new char[]{'-', '\\', '|', '/'};
+            char[] process = new char[]{'-', '\\', '|', '/' };
             while (!Thread.currentThread().isInterrupted()) {
                 if (i == process.length) {
                     i = 0;
@@ -21,7 +21,7 @@ public class ConsoleProgress implements Runnable {
                 Thread.sleep(500);
             }
         } catch (InterruptedException e) {
-            System.out.println("Loading is complete");
+            Thread.currentThread().interrupt();
         }
     }
 }
