@@ -18,7 +18,7 @@ public class Wget implements Runnable {
     public void run() {
         var file = new File("tmp.xml");
         try (var input = new URL(url).openStream();
-             var output = new FileOutputStream(file)) {;
+             var output = new FileOutputStream(file)) {
             var dataBuffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = input.read(dataBuffer, 0, dataBuffer.length)) != -1) {
