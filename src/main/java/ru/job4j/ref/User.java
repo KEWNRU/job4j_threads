@@ -1,7 +1,7 @@
 package ru.job4j.ref;
 
 public class User {
-    String name;
+    private final String name;
 
     public static User of(String name) {
         return new User(name);
