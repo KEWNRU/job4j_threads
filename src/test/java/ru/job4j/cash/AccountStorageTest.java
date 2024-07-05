@@ -1,6 +1,7 @@
 package ru.job4j.cash;
 
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -50,17 +51,15 @@ class AccountStorageTest {
     @Test
     void whenTransferNoMoney() {
         var storage = new AccountStorage();
-        storage.add(new Account(1, 0));
-        storage.add(new Account(2, 100));
-        storage.transfer(1, 2, 0);
-        assertThrows(IllegalArgumentException.class, () -> storage.validationTransfer(1, 2, 10));
-    }
-
-    @Test
-    void whenTransferNoUsers() {
-        var storage = new AccountStorage();
         storage.add(new Account(1, 100));
         storage.add(new Account(2, 100));
-        assertThrows(IllegalArgumentException.class, () -> storage.validationTransfer(3, 5, 100));
+        boolean result = storage.transfer(1, 2, 150);
+        assertThat(result).isFalse();
+        var firstAccount = storage.getById(1)
+                .orElseThrow(() -> new IllegalStateException("Not found account by id = 1"));
+        var secondAccount = storage.getById(2)
+                .orElseThrow(() -> new IllegalStateException("Not found account by id = 2"));
+        assertThat(firstAccount.amount()).isEqualTo(100);
+        assertThat(secondAccount.amount()).isEqualTo(100);
     }
 }
