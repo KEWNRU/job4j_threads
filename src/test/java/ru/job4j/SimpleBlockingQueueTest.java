@@ -10,7 +10,7 @@ class SimpleBlockingQueueTest {
 
     @Test
     public void testOfferAndPollOperations() throws InterruptedException {
-        SimpleBlockingQueue<Integer> blockingQueue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> blockingQueue = new SimpleBlockingQueue<>(5);
         Thread producerThread = new Thread(() -> {
             blockingQueue.offer(1);
             blockingQueue.offer(2);
@@ -41,7 +41,7 @@ class SimpleBlockingQueueTest {
     }
     @Test
     void testQueueOperations() throws InterruptedException {
-        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
+        SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>(5);
         AtomicInteger producerSum = new AtomicInteger(0);
         AtomicInteger consumerSum = new AtomicInteger(0);
         Thread producer = new Thread(() -> {
