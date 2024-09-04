@@ -12,11 +12,13 @@ class SimpleBlockingQueueTest {
     public void testOfferAndPollOperations() throws InterruptedException {
         SimpleBlockingQueue<Integer> blockingQueue = new SimpleBlockingQueue<>(5);
         Thread producerThread = new Thread(() -> {
-            blockingQueue.offer(1);
-            blockingQueue.offer(2);
-            blockingQueue.offer(3);
-            blockingQueue.offer(4);
-            blockingQueue.offer(5);
+            for (int i = 1; i < 6; i++) {
+                try {
+                    blockingQueue.offer(i);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         });
         Thread consumerThread = new Thread(() -> {
             try {
@@ -46,7 +48,11 @@ class SimpleBlockingQueueTest {
         AtomicInteger consumerSum = new AtomicInteger(0);
         Thread producer = new Thread(() -> {
             for (int i = 1; i <= 10; i++) {
-                queue.offer(i);
+                try {
+                    queue.offer(i);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 producerSum.addAndGet(i);
             }
         });

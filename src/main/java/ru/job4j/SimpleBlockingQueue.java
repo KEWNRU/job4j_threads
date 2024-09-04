@@ -17,16 +17,12 @@ public class SimpleBlockingQueue<T> {
         this.capacity = capacity;
     }
 
-    public synchronized void offer(T value) {
+    public synchronized void offer(T value) throws InterruptedException {
         while (capacity <= queue.size()) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            this.wait();
         }
-        this.notifyAll();
         queue.offer(value);
+        this.notifyAll();
     }
 
 
