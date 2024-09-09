@@ -1,10 +1,8 @@
 package ru.job4j;
 
 
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CASCountTest {
@@ -49,5 +47,5 @@ public class CASCountTest {
         first.join();
         second.join();
         assertEquals(200, casCount.get());
-        };
     }
+}
