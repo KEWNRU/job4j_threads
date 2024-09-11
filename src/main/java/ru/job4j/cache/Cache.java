@@ -15,7 +15,7 @@ public class Cache {
 
     public boolean update(Base model) throws OptimisticException {
         return memory.computeIfPresent(model.id(), (id, storeg) -> {
-            if(model.version() != storeg.version()) {
+            if (model.version() != storeg.version()) {
                 throw new OptimisticException("Version mismatch");
             }
             return new Base(id, model.name(), storeg.version() + 1);
