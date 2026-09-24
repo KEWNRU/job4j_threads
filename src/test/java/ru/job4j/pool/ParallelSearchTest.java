@@ -15,7 +15,7 @@ class ParallelSearchTest {
     @Test
     void whenSmallArrayAndElementFoundThenReturnIndex() {
         Integer[] array = {1, 2, 3, 4, 5};
-        int result = ParallelSearch.search (array, 3);
+        int result = ParallelSearch.search(array, 3);
         assertThat(result).isEqualTo(2);
     }
 

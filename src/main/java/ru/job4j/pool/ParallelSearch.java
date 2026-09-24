@@ -27,7 +27,7 @@ public class ParallelSearch<T> extends RecursiveTask<Integer> {
             }
             return -1;
         } else {
-            int middle = (from + to) / 2;
+            int middle = from + (to - from) / 2;
 
             ParallelSearch<T> leftSearch = new ParallelSearch<>(array, target, from, middle);
             ParallelSearch<T> rightSearch = new ParallelSearch<>(array, target, middle + 1, to);
@@ -40,6 +40,7 @@ public class ParallelSearch<T> extends RecursiveTask<Integer> {
             return leftRsl != -1 ? leftRsl : rightRsl;
         }
     }
+
     public static <T> int search(T[] array, T target) {
         ForkJoinPool pool = new ForkJoinPool();
         return pool.invoke(new ParallelSearch<>(array, target, 0, array.length - 1));
